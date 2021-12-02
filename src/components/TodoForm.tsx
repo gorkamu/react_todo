@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Todo } from '../interfaces/interfaces';
 import {          
     Button, 
@@ -37,6 +37,10 @@ export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
         e.preventDefault()
         setTodo([])
     }    
+
+    useEffect( () => {
+        localStorage.setItem("todo", JSON.stringify(todos))
+    }, [todos])
 
     return (
         <>            

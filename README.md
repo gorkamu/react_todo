@@ -8,6 +8,7 @@ It was build with the following technologies:
 - Hooks
 - Typescript
 - Styled Components
+- Local Storage
 
 ## Demo
 You can try it [here](https://todo-app-gmu.netlify.app/)

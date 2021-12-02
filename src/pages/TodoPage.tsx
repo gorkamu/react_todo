@@ -21,7 +21,14 @@ const Logo = styled.img`
 
 export const TodoPage = () => {
 
-    const [todos, setTodo] = useState<Todo[]>([]);
+    const [todos, setTodo] = useState<Todo[]>(() => {
+        const saved = localStorage.getItem("todo")
+        if(saved) {
+            return JSON.parse(saved)
+        }
+        
+        return []
+    });
 
     return (
         <Wrapper>

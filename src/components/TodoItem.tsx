@@ -1,5 +1,5 @@
 import { Todo } from '../interfaces/interfaces';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Item = styled.div<{deleted: boolean}>`
@@ -28,7 +28,9 @@ interface TodoItemProps {
 
 export const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
     
-    const [isDeleted, setDeleted] = useState<boolean>(false);
+    const [isDeleted, setDeleted] = useState<boolean>(() => {
+        return todo.deleted;
+    });
 
     const deleteTodo = (todos: Todo[], e?: React.ChangeEvent<HTMLInputElement>) => {
         let element = e ? e.target.checked : !todo.deleted;
@@ -44,6 +46,10 @@ export const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
 
         setTodos(updatedTodos)        
     }
+
+    useEffect( () => {
+        localStorage.setItem("todo", JSON.stringify(todos))
+    }, [todos])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => deleteTodo(todos, e)
     const handleClick = () => deleteTodo(todos)
