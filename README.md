@@ -7,6 +7,9 @@ It was build with the following technologies:
 - Typescript
 - Styled Components
 
+## Demo
+You can try it [here](https://friendly-davinci-07dd97.netlify.app/)
+
 ## Run it in development mode
 Just type the following script:
 `yarn start`
