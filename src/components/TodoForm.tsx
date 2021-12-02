@@ -80,11 +80,17 @@ const LightIcon = styled(AiOutlineBulb)`
     font-weight: 100;
     vertical-align: bottom;    
 `;
+
 const DarkIcon = styled(AiFillBulb)`
     color: white;
     font-size: 15px;
     font-weight: 100;
     vertical-align: bottom;    
+`;
+
+const MainButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
 `;
 
 
@@ -125,10 +131,7 @@ export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
         <>            
             <form onSubmit={ handleSubmit }>
                 <TextArea placeholder="Note" ref={ textareaRef }/>
-                <div style={{ 
-                    display: "flex",
-                    justifyContent: "space-between"
-                }}>
+                <MainButtonContainer>
                     <div>
                         <Button type="submit">
                             <SaveIcon />
@@ -144,7 +147,7 @@ export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
                             { isLightMode && <LightIcon/> || <DarkIcon/> }                            
                         </BulbButton>             
                     </div> */}
-                </div>
+                </MainButtonContainer>
             </form>
         </>
     )
