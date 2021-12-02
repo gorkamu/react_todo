@@ -1,3 +1,5 @@
+![TODO App](./public/todo.png)
+
 # TODO App
 
 This is the tipical demo TODO application in which you can add new pending tasks and delete them.
@@ -8,7 +10,7 @@ It was build with the following technologies:
 - Styled Components
 
 ## Demo
-You can try it [here](https://friendly-davinci-07dd97.netlify.app/)
+You can try it [here](https://todo-app-gmu.netlify.app/)
 
 ## Run it in development mode
 Just type the following script:
