@@ -1,5 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Todo } from '../interfaces/interfaces';
+import { AiOutlineSave, AiFillBulb, AiOutlineBulb } from 'react-icons/ai';
+import { BsTrash } from "react-icons/bs";
 import styled from 'styled-components';
 
 const TextArea = styled.textarea`
@@ -11,10 +13,16 @@ const TextArea = styled.textarea`
     border: none;   
     padding: 10px; 
     border-radius: 5px;
-    color: #6e6e6e
+    color: #818181;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box;    
+    box-sizing: border-box;
+    
+    &:focus {
+        outline: none !important;
+        border:0px;
+    }
+
 `;
 
 const Button = styled.button`
@@ -43,6 +51,43 @@ const DeleteButton = styled(Button)`
     }
 `;
 
+const BulbButton = styled(Button)`
+    color: #833f55;
+    background: #be9ddf;
+
+    &:hover {
+        background: #967cb1;
+    }
+`;
+
+const SaveIcon = styled(AiOutlineSave)`
+    vertical-align: bottom;
+    font-size: 15px;
+    font-weight: 100;
+    margin-right: 5px;
+`;
+
+const DeleteIcon = styled(BsTrash)`
+    vertical-align: bottom;
+    font-size: 15px;
+    font-weight: 100;
+    margin-right: 5px;
+`;
+
+const LightIcon = styled(AiOutlineBulb)`
+    color: white;
+    font-size: 15px;
+    font-weight: 100;
+    vertical-align: bottom;    
+`;
+const DarkIcon = styled(AiFillBulb)`
+    color: white;
+    font-size: 15px;
+    font-weight: 100;
+    vertical-align: bottom;    
+`;
+
+
 interface TodoFormProps {
     todos: Todo[];
     setTodo: any;
@@ -51,6 +96,7 @@ interface TodoFormProps {
 export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const [ isLightMode, setLightMode ] = useState<boolean>(true);
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()        
@@ -71,12 +117,34 @@ export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
         setTodo([])
     }
 
+    const handleThemeMode = () => {
+        setLightMode(!isLightMode);
+    }
+
     return (
-        <>
+        <>            
             <form onSubmit={ handleSubmit }>
-                <TextArea placeholder="Nota" ref={ textareaRef }/>
-                <Button type="submit">Guardar</Button>
-                <DeleteButton onClick={ (e) => handleDelete(e)}>Borrar</DeleteButton>
+                <TextArea placeholder="Note" ref={ textareaRef }/>
+                <div style={{ 
+                    display: "flex",
+                    justifyContent: "space-between"
+                }}>
+                    <div>
+                        <Button type="submit">
+                            <SaveIcon />
+                            <span>Save</span>
+                        </Button>                
+                        <DeleteButton onClick={ (e) => handleDelete(e)}>
+                            <DeleteIcon />
+                            <span>Delete all</span>
+                        </DeleteButton>
+                    </div>
+                    {/* <div>
+                        <BulbButton onClick={ handleThemeMode }>
+                            { isLightMode && <LightIcon/> || <DarkIcon/> }                            
+                        </BulbButton>             
+                    </div> */}
+                </div>
             </form>
         </>
     )

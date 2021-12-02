@@ -6,11 +6,17 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     margin: auto;
-    width: 60%;    
+    width: 70%;    
     padding: 30px;
     margin-top: 10px;    
     background: #ffffec;
     border-radius: 20px;
+`;
+
+const Logo = styled.img`
+    display: block;
+    margin: auto;
+    margin-bottom: 5%;
 `;
 
 export const TodoPage = () => {
@@ -19,6 +25,7 @@ export const TodoPage = () => {
 
     return (
         <Wrapper>
+            <Logo src="./todo.png" alt="todo logo"/>
             <TodoForm todos={ todos } setTodo={ setTodo }/>
             <TodoList todos={ todos } setTodo={ setTodo }/>
         </Wrapper>
