@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Todo } from '../interfaces/interfaces';
-import { AiOutlineSave, AiFillBulb, AiOutlineBulb } from 'react-icons/ai';
+import { AiOutlineSave } from 'react-icons/ai';
 import { BsTrash } from "react-icons/bs";
 import styled from 'styled-components';
 
@@ -74,20 +74,6 @@ const DeleteIcon = styled(BsTrash)`
     margin-right: 5px;
 `;
 
-const LightIcon = styled(AiOutlineBulb)`
-    color: white;
-    font-size: 15px;
-    font-weight: 100;
-    vertical-align: bottom;    
-`;
-
-const DarkIcon = styled(AiFillBulb)`
-    color: white;
-    font-size: 15px;
-    font-weight: 100;
-    vertical-align: bottom;    
-`;
-
 const MainButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -142,11 +128,6 @@ export const TodoForm = ({todos, setTodo}: TodoFormProps) => {
                             <span>Delete all</span>
                         </DeleteButton>
                     </div>
-                    {/* <div>
-                        <BulbButton onClick={ handleThemeMode }>
-                            { isLightMode && <LightIcon/> || <DarkIcon/> }                            
-                        </BulbButton>             
-                    </div> */}
                 </MainButtonContainer>
             </form>
         </>
