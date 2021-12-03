@@ -1,15 +1,49 @@
 import { Todo } from '../interfaces/interfaces';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ThemeContext, themeMode } from '../context/ThemeContext';
 import styled from 'styled-components';
 
-const Item = styled.div<{deleted: boolean}>`
-    background: white;
-    background: ${props => props.deleted ? "#cbcbb9" : "white" };
-    color: ${props => props.deleted ? "#707068" : "black" };
+
+const getItemTheme = (theme:string, deleted:boolean) => {
+    if(!deleted && theme === themeMode.LIGHT) {
+        return `
+            background: white; 
+            color: black;
+            border: 1px solid #cbcbb9;
+        `
+    }
+
+    if(!deleted && theme === themeMode.DARK) {
+        return `
+            background: black; 
+            color: white;
+            border: 1px solid black;
+        `
+    }
+
+    if(deleted && theme === themeMode.LIGHT) {
+        return `
+            background: #cbcbb9; 
+            color: #707068;
+            border: 1px solid #cbcbb9;
+        `
+    }
+
+    if(deleted && theme === themeMode.DARK) {
+        return `
+            background: #343446; 
+            color: black;
+            border: 1px solid #343446;
+        `
+    }
+}
+
+const Item = styled.div<{deleted: boolean}>`    
+    ${({ theme, deleted }) => getItemTheme(theme, deleted)}    
+    
     padding: 10px;
     margin: 5px 0px;
-    border-radius: 5px;
-    border: 1px solid #cbcbb9;
+    border-radius: 5px;    
     cursor:pointer;
     user-select: none;
 `;
@@ -28,6 +62,8 @@ interface TodoItemProps {
 
 export const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
     
+    const { theme } = useContext(ThemeContext)
+
     const [isDeleted, setDeleted] = useState<boolean>(() => {
         return todo.deleted;
     });
@@ -55,7 +91,7 @@ export const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
     const handleClick = () => deleteTodo(todos)
 
     return (
-        <Item deleted={ isDeleted } onClick={ handleClick }>
+        <Item theme={ theme } deleted={ isDeleted } onClick={ handleClick }>
             <input type="checkbox" onChange={ (e) => handleChange(e) } checked={ isDeleted }/>
             <Label deleted={isDeleted}>{ todo.note }</Label>            
         </Item>
